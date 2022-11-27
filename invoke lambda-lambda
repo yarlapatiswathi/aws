@@ -1,0 +1,22 @@
+create a IAM role with policies
+AWSlambdaRole
+AWSLambdaBasicExecutionRole
+AWSLambda_FullAccess
+
+lambda1:
+
+import json,boto3
+def lambda_handler(event, context):
+   invokeLam=boto3.client('lambda',region_name='us-east-1')
+   payload={'message':'Hi,you have been invoked'}
+   resp=invokeLam.invoke(FunctionName='lambda2',InvocationType='Event',Payload=json.dumps(payload))  
+   # we can set InvocationType='RequestResponse' then print(resp['Payload'].read())
+   return 'Hello from Lambda1!'
+   
+lambda2:
+
+import json
+def lambda_handler(event, context):
+    print(event)
+    return 'Hello from Lambda2!'
+    #or return {'response':'Thanks for calling'}
