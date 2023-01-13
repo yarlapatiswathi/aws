@@ -2,9 +2,9 @@
 import boto3
 def lambda_handler(event, context):
     s3=boto3.client('s3')
-    
+
     if event:
-        print('Event: ',event)
+        print('Event: ',event) # this is new change
         print('Event Type:',type(event))
         file_obj=event['Records'][0]
         filename=str(file_obj['s3']['object']['key'])
